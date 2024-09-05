@@ -1,0 +1,13 @@
+name: flux-image-generator
+region: nyc
+services:
+  - name: web
+    github:
+      repo: your-github-username/your-repo-name
+      branch: main
+    build_command: pip install -r requirements.txt
+    run_command: gunicorn app:app
+    envs:
+      - key: FAL_KEY
+        value: ${FAL_KEY}
+        type: SECRET

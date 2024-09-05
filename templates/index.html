@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLUX.1 Image Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        form { display: grid; gap: 10px; }
+        label { font-weight: bold; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 5px; }
+        input[type="submit"] { background-color: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>FLUX.1 Image Generator</h1>
+    {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <form method="POST">
+        <label for="prompt">Prompt:</label>
+        <input type="text" id="prompt" name="prompt" required>
+        
+        <h2>LoRAs (up to 3)</h2>
+        {% for i in range(3) %}
+        <div>
+            <label for="lora_path_{{ i }}">LoRA {{ i+1 }} Path:</label>
+            <input type="text" id="lora_path_{{ i }}" name="lora_path_{{ i }}">
+            
+            <label for="lora_scale_{{ i }}">LoRA {{ i+1 }} Scale (0-1):</label>
+            <input type="number" id="lora_scale_{{ i }}" name="lora_scale_{{ i }}" min="0" max="1" step="0.1">
+        </div>
+        {% endfor %}
+        
+        <label for="enable_safety">
+            <input type="checkbox" id="enable_safety" name="enable_safety" checked>
+            Enable Safety Filter
+        </label>
+        
+        <input type="submit" value="Generate Image">
+    </form>
+</body>
+</html>
