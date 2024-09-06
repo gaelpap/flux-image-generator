@@ -3,3 +3,4 @@ Werkzeug==2.0.1
 gunicorn==20.1.0
 fal-client==0.4.1
 requests==2.26.0
+Flask-Limiter==2.6.0
